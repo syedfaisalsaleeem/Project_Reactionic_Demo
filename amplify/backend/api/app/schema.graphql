@@ -1,0 +1,234 @@
+type Deck @model {  
+  id: ID!
+  name: String!
+  cards: [Card]! @connection(name: "DeckCards")
+}
+
+type Card @model {  
+  id: ID!
+  question: String!
+  answer: String
+  deck: Deck! @connection(name: "DeckCards")
+}
+type Talk @model {
+ id:ID!
+ clientId:ID
+ name:String!
+ description:String!
+ speakerName:String!
+ speakerBio:String!
+ }
+
+ type User @model{
+ id:ID!
+ fullname:String!
+ preferredname:String
+ nickname:String
+ useravatar:String
+ dateofbirth:String
+ address:addressid
+ identificationdocument:identificationdocumentid
+ security:securityid
+ paymentinformation:paymentinformationid
+ tradingaccount:tradingaccountid
+ socialaccount:socialaccountid
+ research:researchid
+ }
+
+ type addressid @model{
+ id:ID!
+ countryofbirth:String!
+ countryofresidence:String!
+ }
+
+ type identificationdocumentid @model{
+ id:ID!
+ idtype:String!
+ idnumber:String!
+ idimage:String!
+ verified:String!
+ }
+
+ type securityid @model{
+ id:ID!
+ email:String!
+ cellphonenumber:String!
+ password:String!
+ }
+
+ type paymentinformationid @model{
+ id:ID!
+ deposit:depositid @model connection
+ withdrawal:withdrawalid @model connection
+ }
+
+ type depositid @model{
+ sourcetype:String!
+ cardnumber:String!
+ }
+type withdrawalid @model{
+ swiftcode:String!
+ accountholdername:String!
+ }
+ type tradingaccountid @model{
+ id:ID!
+ alpacaconnection:alpacaconnectionid @model connection
+ cashheld:cashheldid @model connection
+ assetsheld:assetsheldid @model connection
+ salehistory:salehistoryid @model connection
+ }
+ type alpacaconnectionid @model{
+ id:ID!
+ userkey:String!
+ username:String!
+ password:String!
+ }
+ type cashheldid @model{
+ id:ID!
+ currencytype:currencytypeid @model connection
+ }
+ type currencytypeid @model{
+ id:ID!
+ amount:String!
+ }
+ type assetsheld @model{
+ id:ID!
+ asset:assetid @model connection
+ }
+ type assetid @model{
+ id:ID!
+ tickercode:String!
+ currencytype:String!
+ currencyprice:String!
+ numberofsharesheld:String!
+ valueofsharesheld:String!
+ classofshare:String!
+ purchasehistory:purchasehistoryid @model connection
+ salehistory:salehistoryid @model connection
+ }
+ type purchasehistoryid @model{
+ id:ID!
+ purchasenumber:purchasenumberid @model connection
+ }
+ type purchasenumberid @model{
+ id:ID!
+ timeofpurchase:String!
+ purchaseid:ID!
+ numberofsharespurchase:String!
+ pricepurchased:String!
+ }
+type salehistoryid @model{
+ id:ID!
+ purchasenumber:purchasenumberid1 @model connection
+ }
+ type purchasenumberid1 @model{
+ id:ID!
+ timeofsale:String!
+ saleid:ID!
+ numberofsharespurchase:String!
+ pricesold:String!
+ profit:String!
+ }
+ type socialaccountid @model{
+ id:ID!
+ followers:followersid @model connection
+ following:followingid @model connection
+ post:postid @model connection 
+ }
+  type followersid @model{
+  id:ID!
+  numberoffollowers:String!
+  idoffollower:String!
+  }
+  type followingid @model{
+  id:ID!
+  numberoffollowedaccounts:String!
+  idoffollowed:ID!
+  }
+  type postid @model{
+  id:ID!
+  time:String!
+  geolocation:String!
+  content:String!
+  posttype:posttypeid @model connection
+  reactions:reactionsid @model connection
+  comments:commentsid @model connection
+  }
+  type reactions @model{
+  id:ID!
+  reactionid:ID!
+  typeofreaction:String!
+  numberofreactions:String!
+  }
+  type comments @model{
+  id:ID!
+  commentid:ID!
+  time:String!
+  content:String!
+  commentreply:commentreplyid @model connection
+  commentreactions:commentreactionsid @model connection
+  }
+  type commentreplyid @model connection{
+  id:ID!
+  linkdatafromcommentviacommentid:String!
+  }
+  type commentreactionsid @model{
+  id:ID!
+  typeofreaction:String!
+  numberofreactions:String!
+  }
+ type researchid @model{
+ id:ID!
+ perferenceinformation:performanceinformationid @model connection
+ savearticles:savearticlesid @model connection
+ subscriptions:subscriptionsid @model connection
+ }
+ type perferenceinformationid{
+ id:ID!
+ categories:String!
+ subcategories:subcategoryid @model connection
+ }
+
+ type subcategoryid @model{
+ id:ID!
+ categoryid:ID!
+ categoryname:String!
+ }
+
+ type savearticlesid @model{
+ id:ID!
+ articleid:ID!
+ articlesource:String!
+ subscriptiontype:String!
+ datesaved:String!
+ }
+
+ type subscriptionsid @model{
+ id:ID!
+ subscription:subscriptionid @model connection
+ subscriptionexpirydate:String!
+ subscriptionquota:subscriptionquotaid @model connection
+ }
+ type subscriptionquotaid @model{
+  id:ID!
+  utilized:utilizedid @model connection
+ }
+ type utilizedid @model{
+ id:ID!
+ total:String!
+ consumed:String!
+ }
+ type subscriptionid @model {
+ id:ID!
+ serviceprovider:serviceproviderid @model connection
+ }
+ type serviceprovider @model {
+ id:ID!
+ subscriptioncredentials:subscriptioncredentialsid @model connection
+ }
+ type subscriptioncredentials @model{
+ id:ID!
+ subscriptionkey:String!
+ username:String!
+ password:String!
+ }
