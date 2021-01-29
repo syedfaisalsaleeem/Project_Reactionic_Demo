@@ -49,3 +49,15 @@
 .MuiMenu-paper {
   height: 500px;
 }
+.contactBtn {
+  position: relative;
+}
+
+.contactBtn button{
+ width: 100px;
+ height: 30px;
+ border-radius: 25px;
+position: absolute;
+right: 8%;
+}
+

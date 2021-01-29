@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
-import Step3b from "../../components/Step3/Step3b/Step3b";
+import Step3b from "../../components/StepOtp/StepOtp";
 import { TextField, MenuItem } from "@material-ui/core";
 import { IonGrid, IonRow, IonCol } from "@ionic/react";
+import { IonHeader, IonToolbar} from "@ionic/react";
 import { withRouter } from "react-router";
+import { makeStyles} from "@material-ui/core/styles";
 import Button from "../../components/UI/Button/Button";
 import "./Login.css";
+import imgArr from "../../assets/arrow1.png";
+import { IonButton} from '@ionic/react';
+
 
 const countryData = [
   { code: "93", apiCode: "af" },
@@ -251,8 +256,27 @@ const countryData = [
   { code: "260", apiCode: "zm" },
   { code: "263", apiCode: "zw" },
 ];
-
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    background: "#F8F9FC",
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  headControl: {
+    display: "flex",
+    paddingTop: "1rem",
+    alignItems: "center",
+    "& > *:first-child": {
+      fontSize: "1.5rem",
+    },
+  },
+}));
+const toPage = (props, link) => props.history.push(link);
 const Login = (props) => {
+  const classes = useStyles();
   const [txt, setTxt] = React.useState("");
   const [number, setNumber] = React.useState("");
   const [valid, setValid] = React.useState(false);
@@ -265,16 +289,17 @@ const Login = (props) => {
     } else {
       setValid(false);
     }
-    const newNumber = `+${txt + number}`;
-    if (newNumber === "+9333312812064") {
+    const newNumber = `${txt + number}`;
+    if (newNumber === "+923312812064") {
       setError(false);
     }
   }, [txt, number]);
 
   const onHandleNext = () => {
+    console.log(txt + number);
     setError(false);
-    const newNumber = `+${txt + number}`;
-    if (newNumber !== "+933312812064") {
+    const newNumber = `${txt + number}`;
+    if (newNumber !== "+923312812064") {
       setError(true);
       setValid(false);
     } else {
@@ -289,37 +314,78 @@ const Login = (props) => {
         <Step3b handleNext={() => props.history.push("/passcode")} />
       ) : (
         <div className="Login ion-margin-horizontal">
+          <IonHeader>
+            <IonToolbar>
+            <IonButton  color="dark" fill="clear" handleNext={() => props.history.push("/")} href="/">
+            <img src={imgArr} alt="" />
+              Back</IonButton>
+
+            </IonToolbar>
+          </IonHeader>
+          {/* <IonHeader className="ion-no-border">
+          <IonToolbar className="ion-no-padding">
+            <div className={classes.root}>
+              <div className={classes.headControl}>
+                <Button
+                  
+                  // onClick={
+                  //   activeStep === 0
+                  //     ? () => props.history.push("/")
+                  //     : handleBack
+                  // }
+                >
+                  <i className="fas fa-angle-left"></i>
+                </Button>
+                <div style={{ fontSize: "12px" }}>
+                  Back
+                </div>
+              </div>
+            </div>
+          </IonToolbar>
+        </IonHeader> */}
+          {/* <IonGrid className="backBtn">
+            <IonRow className="ion-justify-content-around ion-align-items-center">
+              <Button handleNext={() => props.history.push("/")} style={{"width":"10px"}}>
+                
+                <img src={imgArr} alt="" />
+              </Button>
+            </IonRow>
+            <IonRow>
+            <p>Back</p>
+            </IonRow>
+          </IonGrid> */}
           <div className="loginTitle ion-margin-top ion-padding-top">
             <h1>Welcome back,</h1>
           </div>
           <IonGrid className="loginFields">
             <IonRow className="ion-justify-content-around ion-align-items-center">
-              <IonCol size="4">
+              <IonCol size="5">
                 <TextField
                   className="field1"
                   fullWidth
                   id="outlined-select-gender"
-                  select
-                  label={
-                    txt === "" ? (
-                      <div className="labelFlag">
-                        <img
-                          src="https://www.countryflags.io/be/flat/32.png"
-                          alt=""
-                        />
-                        <p>+89</p>
-                      </div>
-                    ) : (
-                      ""
-                    )
-                  }
-                  InputLabelProps={{ shrink: false }}
+                  label="Country Code"
+                  // select
+                  // label={
+                  //   txt === "" ? (
+                  //     <div className="labelFlag">
+                  //       <img
+                  //         src="https://www.countryflags.io/be/flat/32.png"
+                  //         alt=""
+                  //       />
+                  //       <p>+89</p>
+                  //     </div>
+                  //   ) : (
+                  //     ""
+                  //   )
+                  // }
+                  // InputLabelProps={{ shrink: false }}
                   margin="normal"
                   variant="outlined"
                   value={txt}
                   onChange={(e) => setTxt(e.target.value)}
                 >
-                  {countryData.map((el, id) => {
+                  {/* {countryData.map((el, id) => {
                     return (
                       <MenuItem value={el.code} key={id}>
                         <div
@@ -339,10 +405,10 @@ const Login = (props) => {
                         </div>
                       </MenuItem>
                     );
-                  })}
+                  })} */}
                 </TextField>
               </IonCol>
-              <IonCol size="8">
+              <IonCol size="7">
                 <TextField
                   type="number"
                   className="field2"

@@ -58,8 +58,8 @@ const App = () => {
             <Route path="/passcode" component={Step2} />
             <Route path="/otp" component={Step3b} />
             <Route path="/login" component={Login} />
-            {/* <Route path="/contact-us" component={Contact} /> */}
-            {/* <Route path="/signUp" component={SignUp} /> */}
+            <Route path="/contact-us" component={Contact} />
+            <Route path="/signUp" component={SignUp} />
             <Route exact path="/" component={Starter} />
           </Switch>
         </IonApp>

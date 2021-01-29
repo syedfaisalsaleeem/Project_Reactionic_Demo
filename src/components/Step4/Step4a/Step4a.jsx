@@ -233,7 +233,10 @@ const Step4a = (props) => {
                 </div>
               );
             })}
-            <Button disabled={!FormIsValid}>Continue</Button>
+            <Button 
+            // disabled={!FormIsValid}
+            >
+              Continue</Button>
           </form>
         </IonGrid>
       </div>

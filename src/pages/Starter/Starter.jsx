@@ -47,7 +47,7 @@ const Starter = (props) => {
               <IonButton
                 className="btn"
                 color="light"
-                // onClick={() => toPage(props, "/signUp")}
+                onClick={() => toPage(props, "/signUp")}
                 expand="block"
               >
                 SignUp

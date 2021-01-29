@@ -18,13 +18,13 @@ const inputData = [
   { label: "Your Contact Email", type: "email" },
   { label: "Your Contact Number", type: "number" },
 ];
-
-const Contact = () => {
+const toPage = (props, link) => props.history.push(link);
+const Contact = (props) => {
   return (
     <div className="Contact">
       <div className="contactHeader"></div>
       <div className="backBtn">
-        <Button>
+        <Button onClick={() => toPage(props,"/")}>
           <img src={imgArr} alt="" />
         </Button>
         <p>Back</p>
